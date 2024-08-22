@@ -28,4 +28,16 @@ public class Pet {
 
     @Column(name= "Gender")
     private String gender;
+
+    @Column(name = "Sex")
+    private Boolean sex;
+
+    @Column(name = "Category")
+    private String category;
+
+    @Column(name = "Description")
+    private String description;
+
+    @Column(name = "Adopted")
+    private boolean adopted;
 }
