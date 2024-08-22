@@ -13,7 +13,7 @@ public class PetService {
     @Autowired
     IPetRepository iPetRepository;
 
-    public Pet createPet(Pet pet) {
+    public Pet addPet(Pet pet) {
         return iPetRepository.save(pet);
     }
 
@@ -33,7 +33,7 @@ public class PetService {
         }
     }
 
-    public void updatePet(Pet pet, int id) {
+    public void editPet(Pet pet, int id) {
         pet.setId(id);
         iPetRepository.save(pet);
     }
