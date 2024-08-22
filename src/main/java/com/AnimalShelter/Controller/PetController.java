@@ -33,7 +33,7 @@ public class PetController {
 }
 
 @DeleteMapping(path = "/Pet/{id}")
-    public ResponseEntity<void> detelePetById(@PathVariable int id) {
+    public ResponseEntity<void> deletePetById(@PathVariable int id) {
     try {
         boolean delete = petService.deletePetById(id);
         if (delete) {

@@ -13,11 +13,11 @@ public class PetService {
     @Autowired
     IPetRepository iPetRepository;
 
-    public Pet addPet(Pet pet) {
+    public Pet createPet(Pet pet) {
         return iPetRepository.save(pet);
     }
 
-    public List<Pet> getAllPets() {
+    public List<Pet> getAllPet() {
         try {
             return iPetRepository.findAll();
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class PetService {
         }
     }
 
-    public Optional<Pet> getPetById(int id) {
+    public Optional<Pet> getPetId(int id) {
         try {
             return iPetRepository.findById(id);
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class PetService {
         }
     }
 
-    public void editPet(Pet pet, int id) {
+    public void updatePetById(Pet pet, int id) {
         pet.setId(id);
         iPetRepository.save(pet);
     }
