@@ -1,4 +1,4 @@
-package com.AnimalShelter.Controller;
+package com.AnimalShelter.controller;
 
 public class PetControllerTest {
 }
