@@ -30,5 +30,17 @@ public class PetServiceTest {
         pet1 = new Pet();
         pet1.setId(1);
         pet1.setName("Bolita");
+        pet1.setAge(4);
+        pet1.setBreed("Belier");
+        pet1.setGender("Male");
+
+        pet2 = new Pet();
+        pet2.setId(2);
+        pet2.setName("Lia");
+        pet2.setAge(5);
+        pet2.setBreed("Water Dog");
+        pet2.setGender("Female");
     }
+
+
 }
