@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("")
@@ -23,12 +24,12 @@ public class PetController {
 }
 
 @GetMapping(path = "")
-    public ArrayList<Pet> getAllPet(){
+    public List<Pet> getAllPet(){
     return petService.getAllPet();
 }
 
 @GetMapping(path ="/Pet/{id}")
-    public Pet getPetId(@PathVariable int id){
+    public Optional<Pet> getPetId(@PathVariable int id){
     return petService.getPetId(id);
 }
 
