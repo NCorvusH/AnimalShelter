@@ -2,7 +2,6 @@ package com.AnimalShelter.service;
 
 import com.AnimalShelter.model.Donation;
 import com.AnimalShelter.repository.IDonationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class DonationService {
 
-    @Autowired
-    private IDonationRepository iDonationRepository;
+    private final IDonationRepository iDonationRepository;
+
+    public DonationService(IDonationRepository iDonationRepository) {
+        this.iDonationRepository = iDonationRepository;
+    }
 
     public Donation createDonation(Donation donation) {
         return iDonationRepository.save(donation);
@@ -35,7 +37,7 @@ public class DonationService {
     }
 
     public void editDonation(int donationId, Donation updateDonation) {
-        updateDonation.setDonationId(donationId);
+        updateDonation.setId(donationId);
         iDonationRepository.save(updateDonation);
     }
 
