@@ -1,4 +1,4 @@
-package com.AnimalShelter.Service;
+package com.AnimalShelter.service;
 
 public class PetServiceTest {
 }

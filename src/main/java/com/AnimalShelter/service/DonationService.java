@@ -1,7 +1,7 @@
-package com.AnimalShelter.Service;
+package com.AnimalShelter.service;
 
-import com.AnimalShelter.Model.Donation;
-import com.AnimalShelter.Repository.IDonationRepository;
+import com.AnimalShelter.model.Donation;
+import com.AnimalShelter.repository.IDonationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
