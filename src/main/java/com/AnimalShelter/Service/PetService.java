@@ -5,6 +5,7 @@ import com.AnimalShelter.Repository.IPetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,11 +14,11 @@ public class PetService {
     @Autowired
     IPetRepository iPetRepository;
 
-    public Pet addPet(Pet pet) {
+    public Pet createPet(Pet pet) {
         return iPetRepository.save(pet);
     }
 
-    public List<Pet> getAllPets() {
+    public List<Pet> getAllPet() {
         try {
             return iPetRepository.findAll();
         } catch (Exception e) {
@@ -33,7 +34,7 @@ public class PetService {
         }
     }
 
-    public void editPet(Pet pet, int id) {
+    public void updatePetById(Pet pet, int id) {
         pet.setId(id);
         iPetRepository.save(pet);
     }

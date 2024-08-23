@@ -7,33 +7,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/")
 @CrossOrigin(origins = "*")
 public class PetController {
 
     @Autowired
     PetService petService;
 
-@PostMapping(path = "/Pet")
+@PostMapping(path = "/pet")
     public Pet createPet(@RequestBody Pet newPet){
     return petService.createPet(newPet);
 }
 
 @GetMapping(path = "")
-    public ArrayList<Pet> getAllPet(){
+    public List<Pet> getAllPet(){
     return petService.getAllPet();
 }
 
-@GetMapping(path ="/Pet/{id}")
-    public Pet getPetId(@PathVariable int id){
-    return petService.getPetId(id);
+@GetMapping(path ="/pet/{id}")
+    public Optional<Pet> getPetById(@PathVariable int id){
+    return petService.getPetById(id);
 }
 
-@DeleteMapping(path = "/Pet/{id}")
-    public ResponseEntity<void> detelePetById(@PathVariable int id) {
+@DeleteMapping(path = "/pet/{id}")
+    public ResponseEntity<Void> deletePetById(@PathVariable int id) {
     try {
         boolean delete = petService.deletePetById(id);
         if (delete) {
@@ -45,9 +47,10 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }
-@PutMapping(path ="/Pet/{id}")
+@PutMapping(path ="/pet/{id}")
     public void updatePetById(@RequestBody Pet pet, @PathVariable int id){
     petService.updatePetById(pet, id);
 }
 
 }
+
