@@ -1,7 +1,7 @@
-package com.AnimalShelter.Controller;
+package com.AnimalShelter.controller;
 
-import com.AnimalShelter.Model.Pet;
-import com.AnimalShelter.Service.PetService;
+import com.AnimalShelter.model.Pet;
+import com.AnimalShelter.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

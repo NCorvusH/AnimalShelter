@@ -1,11 +1,10 @@
-package com.AnimalShelter.Service;
+package com.AnimalShelter.service;
 
-import com.AnimalShelter.Model.Pet;
-import com.AnimalShelter.Repository.IPetRepository;
+import com.AnimalShelter.model.Pet;
+import com.AnimalShelter.repository.IPetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

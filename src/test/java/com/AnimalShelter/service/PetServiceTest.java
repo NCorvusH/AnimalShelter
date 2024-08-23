@@ -1,6 +1,6 @@
-package com.AnimalShelter.Service;
+package com.AnimalShelter.service;
 
-import com.AnimalShelter.Repository.IPetRepository;
+import com.AnimalShelter.repository.IPetRepository;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 

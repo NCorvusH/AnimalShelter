@@ -1,4 +1,4 @@
-package com.AnimalShelter.Model;
+package com.AnimalShelter.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

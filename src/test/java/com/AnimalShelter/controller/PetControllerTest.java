@@ -1,7 +1,7 @@
-package com.AnimalShelter.Controller;
+package com.AnimalShelter.controller;
 
-import com.AnimalShelter.Model.Pet;
-import com.AnimalShelter.Service.PetService;
+import com.AnimalShelter.model.Pet;
+import com.AnimalShelter.service.PetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
