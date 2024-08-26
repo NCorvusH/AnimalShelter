@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("")
@@ -26,8 +27,8 @@ public class DonationController {
     }
 
     @GetMapping(path = "/Donation/{id}")
-        public void getDonationId(@PathVariable int id){
-        return donationService.getDonationByID(donationId);
+        public Optional<Donation> getDonationId(@PathVariable int id){
+        return donationService.getDonationByID(id);
 
     }
 

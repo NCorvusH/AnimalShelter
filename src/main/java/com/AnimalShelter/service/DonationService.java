@@ -26,9 +26,9 @@ public class DonationService {
         }
     }
 
-    public Optional<Donation> getDonationByID (int donationId) {
+    public Optional<Donation> getDonationByID (int id) {
         try {
-            return iDonationRepository.findById(donationId);
+            return iDonationRepository.findById(id);
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving donation details.", e);
         }
