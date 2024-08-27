@@ -35,7 +35,7 @@ public class DonationService {
     }
 
     public void updateDonation(int donationId, Donation updateDonation) {
-        updateDonation.setDonationId(donationId);
+        updateDonation.setId(donationId);
         iDonationRepository.save(updateDonation);
     }
 
