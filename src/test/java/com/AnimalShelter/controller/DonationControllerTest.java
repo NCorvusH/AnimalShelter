@@ -10,13 +10,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -51,7 +49,7 @@ public class DonationControllerTest {
 
         donation2 = new Donation();
         donation2.setDonationId(2);
-        donation2.setDonorName("Anonimo");
+        donation2.setDonorName("anonymous");
         donation2.setMessage("Donation to improve the shelter");
         donation2.setAmount(new BigDecimal(10000));
         donation2.setDate( LocalDate.of(2024,3,7));
@@ -86,7 +84,7 @@ public class DonationControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.donationId").value(2))
-                .andExpect(jsonPath("$.donorName").value("Anonimo"))
+                .andExpect(jsonPath("$.donorName").value("anonymous"))
                 .andExpect(jsonPath("$.message").value("Donation to improve the shelter"))
                 .andExpect(jsonPath("$.amount").value(10000))
                 .andExpect(jsonPath("$.date[0]").value(2024)) // Año
