@@ -3,6 +3,7 @@ package com.AnimalShelter.controller;
 import com.AnimalShelter.model.Donation;
 import com.AnimalShelter.service.DonationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +25,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringJUnitConfig
+
 public class DonationControllerTest {
 
     @Mock
@@ -41,18 +43,18 @@ public class DonationControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(donationController).build();
 
         donation1 = new Donation();
-        donation1.setId(1);
+        donation1.setDonationId(1);
         donation1.setDonorName("Emilia");
         donation1.setMessage("donation for beds");
         donation1.setAmount(new BigDecimal(100));
-        donation1.setDate(LocalDate.of(2024,8,26));
+        donation1.setDate(LocalDate.of(2024,3,8));
 
         donation2 = new Donation();
-        donation2.setId(2);
+        donation2.setDonationId(2);
         donation2.setDonorName("Anonimo");
         donation2.setMessage("Donation to improve the shelter");
         donation2.setAmount(new BigDecimal(10000));
-        donation2.setDate(LocalDate.of(2024, 8, 28));
+        donation2.setDate( LocalDate.of(2024,3,7));
 
     }
     @Test
@@ -60,51 +62,61 @@ public class DonationControllerTest {
         when(donationService.createDonation(any(Donation.class))).thenReturn(donation1);
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         String donationJson = objectMapper.writeValueAsString(donation1);
 
         mockMvc.perform(post("/Donation")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(donationJson))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.DonorName").value("Emilia"))
-                .andExpect(jsonPath("$.Message").value("donation for beds"))
-                .andExpect(jsonPath("$.Amount").value(15))
-                .andExpect(jsonPath("$.Date").value("26-08-2024"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.donationId").value(1))
+                .andExpect(jsonPath("$.donorName").value("Emilia"))
+                .andExpect(jsonPath("$.message").value("donation for beds"))
+                .andExpect(jsonPath("$.amount").value(100))
+                .andExpect(jsonPath("$.date[0]").value(2024)) // Año
+                .andExpect(jsonPath("$.date[1]").value(3))   // Mes
+                .andExpect(jsonPath("$.date[2]").value(8));
     }
     @Test
     void readDonationById() throws Exception{
         when(donationService.getDonationById(2)).thenReturn(Optional.of(donation2));
-        mockMvc.perform(get("/Donation")
+
+        mockMvc.perform(get("/Donation/2")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.DonorName").value("Anonimo"))
-                .andExpect(jsonPath("$.Message").value("Donation to improve the shelter"))
-                .andExpect(jsonPath("$.Amount").value(100.000))
-                .andExpect(jsonPath("$.Date").value("26-08-2024"));
+                .andExpect(jsonPath("$.donationId").value(2))
+                .andExpect(jsonPath("$.donorName").value("Anonimo"))
+                .andExpect(jsonPath("$.message").value("Donation to improve the shelter"))
+                .andExpect(jsonPath("$.amount").value(10000))
+                .andExpect(jsonPath("$.date[0]").value(2024)) // Año
+                .andExpect(jsonPath("$.date[1]").value(3))   // Mes
+                .andExpect(jsonPath("$.date[2]").value(7));
     }
     @Test
     void deleteDonationById() throws Exception{
         when(donationService.deleteDonation(1)).thenReturn(true);
-        mockMvc.perform(delete("/Donation"))
+
+        mockMvc.perform(delete("/Donation/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Donation with id 1" + 1 + "was delete" ));
+                .andExpect(content().string("Donation with id 1 was deleted" ));
 
         when(donationService.deleteDonation(1)).thenReturn(false);
-        mockMvc.perform(delete("/Donation"))
+
+        mockMvc.perform(delete("/Donation/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Donation with id 1" + 1 + "not found" ));
+                .andExpect(content().string("Donation with id 1 not found" ));
     }
     @Test
     void updateDonation() throws Exception{
-        doNothing().when(donationService).updateDonation(donation2, 2);
+        doNothing().when(donationService).updateDonation(any(Donation.class),any(Integer.class));
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
         String donationJson = objectMapper.writeValueAsString(donation2);
 
-        mockMvc.perform(post("/Donation")
+        mockMvc.perform(put("/Donation/2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(donationJson))
                 .andExpect(status().isOk());
