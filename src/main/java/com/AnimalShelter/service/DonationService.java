@@ -28,7 +28,7 @@ public class DonationService {
         }
     }
 
-    public Optional<Donation> getDonationByID (int id) {
+    public Optional<Donation> getDonationById (int id) {
         try {
             return iDonationRepository.findById(id);
         } catch (Exception e) {
@@ -36,9 +36,9 @@ public class DonationService {
         }
     }
 
-    public void updateDonation(int donationId, Donation updateDonation) {
-        updateDonation.setDonationId(donationId);
-        iDonationRepository.save(updateDonation);
+    public void updateDonation(Donation donation, int id) {
+        donation.setId(id);
+        iDonationRepository.save(donation);
     }
 
     public boolean deleteDonation(int donationId) {

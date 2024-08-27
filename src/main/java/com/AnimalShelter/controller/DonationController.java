@@ -28,13 +28,13 @@ public class DonationController {
 
     @GetMapping(path = "/Donation/{id}")
         public Optional<Donation> getDonationId(@PathVariable int id){
-        return donationService.getDonationByID(id);
+        return donationService.getDonationById(id);
 
     }
 
     @PutMapping(path = "/Donation/{id}")
          public void  updateDonation(@RequestBody Donation donation, @PathVariable int id){
-        return donationService.updateDonation(donation);
+         donationService.updateDonation(donation, id);
 
     }
 

@@ -18,9 +18,7 @@ public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-
-    @Column(name = "DonationID")
-    private String donationId;
+    private int id;
 
     @Column(name = "DonorName")
     private String donorName;
