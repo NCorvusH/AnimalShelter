@@ -60,14 +60,14 @@ class DonationServiceTest implements AutoCloseable {
     void testViewDonationDetails() {
         int donationId = 1;
         Donation donation = new Donation();
-        donation.setId(donationId);
+        donation.setDonationId(donationId);
 
         when(iDonationRepository.findById(donationId)).thenReturn(Optional.of(donation));
 
         Optional<Donation> result = donationService.viewDonationDetails(donationId);
 
         assertTrue(result.isPresent());
-        assertEquals(donationId, result.get().getId());
+        assertEquals(donationId, result.get().getDonationId());
         verify(iDonationRepository, times(1)).findById(donationId);
     }
 
@@ -75,7 +75,7 @@ class DonationServiceTest implements AutoCloseable {
     void testEditDonation() {
         int donationId = 1;
         Donation updatedDonation = new Donation();
-        updatedDonation.setId(donationId);
+        updatedDonation.setDonationId(donationId);
 
         when(iDonationRepository.save(updatedDonation)).thenReturn(updatedDonation);
 
