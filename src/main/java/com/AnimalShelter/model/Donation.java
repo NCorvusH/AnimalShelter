@@ -17,13 +17,17 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
+
+    @Column(name = "DonationId")
+    private String donationId;
 
     @Column(name = "DonorName")
     private String donorName;
+
     @Column(name = "Message")
     private String message;
+
     @Column(name = "Amount")
     private BigDecimal amount;
 
