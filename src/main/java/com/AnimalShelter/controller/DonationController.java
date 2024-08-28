@@ -21,7 +21,7 @@ public class DonationController {
 
     }
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/Donation")
        public List<Donation> getAllDonation(){
         return donationService.getAllDonation();
     }
