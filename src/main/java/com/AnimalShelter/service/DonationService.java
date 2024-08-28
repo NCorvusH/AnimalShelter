@@ -28,16 +28,16 @@ public class DonationService {
         }
     }
 
-    public Optional<Donation> getDonationById (int id) {
+    public Optional<Donation> getDonationById (int donationId) {
         try {
-            return iDonationRepository.findById(id);
+            return iDonationRepository.findById(donationId);
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving donation details.", e);
         }
     }
 
-    public void updateDonation(Donation donation, int id) {
-        donation.setDonationId(id);
+    public void updateDonation(Donation donation, int donationId) {
+        donation.setDonationId(donationId);
         iDonationRepository.save(donation);
     }
 
