@@ -3,8 +3,8 @@ package com.AnimalShelter.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 
 @Getter
 @Setter
@@ -19,5 +19,6 @@ public class PetDto {
     private String category;
     private String description;
     private boolean adopted;
+    private MultipartFile photo;
 }
 

@@ -50,7 +50,7 @@ public class PetService {
 
     }
 
-    private Pet convertDTOToEntity(PetDto petDTO) throws  IOException {
+    private Pet convertDTOToEntity(PetDto petDTO) throws IOException {
         Pet pet = new Pet();
         pet.setName(petDTO.getName());
         pet.setAge(petDTO.getAge());
@@ -61,13 +61,10 @@ public class PetService {
         pet.setDescription(petDTO.getDescription());
         pet.setAdopted(petDTO.isAdopted());
 
-//        if (petDTO.getPhoto() != null && !petDTO.getPhoto().isEmpty()) {
-//            pet.setPhoto(petDTO.getPhoto().getBytes());
-//        }
 
+        if (petDTO.getPhoto() != null && !petDTO.getPhoto().isEmpty()) {
+            pet.setPhoto(petDTO.getPhoto().getBytes());
+        }
         return pet;
     }
-
-
 }
-
