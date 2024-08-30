@@ -1,6 +1,7 @@
 package com.AnimalShelter.service;
 
 import com.AnimalShelter.model.Pet;
+import com.AnimalShelter.model.PetDto;
 import com.AnimalShelter.repository.IPetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.html.Option;
 import java.io.IOException;
@@ -123,5 +125,35 @@ public class PetServiceTest {
         assertEquals(pet1.getName(), foundPet.get().getName());
         verify(iPetRepository, times(1)).findById(1);
     }
+    @Test
+    void convertDTOToEntity_withPhoto() throws IOException {
+        // Arrange
+        PetDto petDTO = new PetDto();
+        petDTO.setName("Buddy");
+        petDTO.setAge(3);
+        petDTO.setBreed("Labrador");
+        petDTO.setGender("Male");
+        petDTO.setCategory("Dog");
+        petDTO.setDescription("Friendly and playful.");
+        petDTO.setAdopted(true);
 
+        String photoContent = "fakePhotoContent";
+        MultipartFile photo = mock(MultipartFile.class);
+        when(photo.isEmpty()).thenReturn(false);
+        when(photo.getBytes()).thenReturn(photoContent.getBytes());
+        petDTO.setPhoto(photo);
+
+        Pet pet = petService.convertDTOToEntity(petDTO);
+
+        // Assert
+        assertNotNull(pet);
+        assertEquals("Buddy", pet.getName());
+        assertEquals(3, pet.getAge());
+        assertEquals("Labrador", pet.getBreed());
+        assertEquals("Male", pet.getGender());
+        assertEquals("Dog", pet.getCategory());
+        assertEquals("Friendly and playful.", pet.getDescription());
+        assertTrue(pet.isAdopted());
+        assertArrayEquals(photoContent.getBytes(), pet.getPhoto());
+    }
 }
