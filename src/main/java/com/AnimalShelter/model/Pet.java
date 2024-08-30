@@ -41,4 +41,8 @@ public class Pet {
     @Lob
     @Column(name = "Photo")
     private byte[] photo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 }
