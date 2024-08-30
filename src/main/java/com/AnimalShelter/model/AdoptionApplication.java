@@ -62,4 +62,7 @@ public class AdoptionApplication {
     @Column(length = 500)
     private String comments;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
