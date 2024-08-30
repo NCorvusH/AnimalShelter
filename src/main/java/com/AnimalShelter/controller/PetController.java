@@ -12,29 +12,29 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/news")
+@RequestMapping("")
 @CrossOrigin(origins = "*")
 public class PetController {
 
     @Autowired
     PetService petService;
 
-@PostMapping(path = "/api/v1/news")
+@PostMapping(path = "/pet")
     public Pet createPet(@RequestBody Pet newPet){
     return petService.createPet(newPet);
 }
 
-@GetMapping(path = "/api/v1/news")
+@GetMapping(path = "/pet")
     public List<Pet> getAllPet(){
     return petService.getAllPet();
 }
 
-@GetMapping(path ="/api/v1/news/{id}")
+@GetMapping(path ="/pet/{id}")
     public Optional<Pet> getPetById(@PathVariable int id){
     return petService.getPetById(id);
 }
 
-@DeleteMapping(path = "/api/v1/news/{id}")
+@DeleteMapping(path = "/pet/{id}")
     public ResponseEntity<Void> deletePetById(@PathVariable int id) {
     try {
         boolean delete = petService.deletePetById(id);
@@ -47,7 +47,7 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }
-@PutMapping(path ="/api/v1/news/{id}")
+@PutMapping(path ="/pet/{id}")
     public void updatePetById(@RequestBody Pet pet, @PathVariable int id){
     petService.updatePetById(pet, id);
 }
