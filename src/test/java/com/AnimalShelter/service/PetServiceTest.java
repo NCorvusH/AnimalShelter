@@ -142,7 +142,9 @@ public class PetServiceTest {
         when(photo.getBytes()).thenReturn(photoContent.getBytes());
         petDTO.setPhoto(photo);
 
+
         Pet pet = petService.convertDTOToEntity(petDTO);
+
 
         assertNotNull(pet);
         assertEquals("Buddy", pet.getName());
@@ -153,5 +155,33 @@ public class PetServiceTest {
         assertEquals("Friendly and playful.", pet.getDescription());
         assertTrue(pet.isAdopted());
         assertArrayEquals(photoContent.getBytes(), pet.getPhoto());
+    }
+
+    @Test
+    void convertDTOToEntity_withoutPhoto() throws IOException {
+
+        PetDto petDTO = new PetDto();
+        petDTO.setName("Buddy");
+        petDTO.setAge(3);
+        petDTO.setBreed("Labrador");
+        petDTO.setGender("Male");
+        petDTO.setCategory("Dog");
+        petDTO.setDescription("Friendly and playful.");
+        petDTO.setAdopted(true);
+        petDTO.setPhoto(null);
+
+
+        Pet pet = petService.convertDTOToEntity(petDTO);
+
+
+        assertNotNull(pet);
+        assertEquals("Buddy", pet.getName());
+        assertEquals(3, pet.getAge());
+        assertEquals("Labrador", pet.getBreed());
+        assertEquals("Male", pet.getGender());
+        assertEquals("Dog", pet.getCategory());
+        assertEquals("Friendly and playful.", pet.getDescription());
+        assertTrue(pet.isAdopted());
+        assertNull(pet.getPhoto());
     }
 }
