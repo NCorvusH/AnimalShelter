@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "Donation")
 @Getter
@@ -14,15 +17,18 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DonationId")
+    private int donationId;
 
-    private int id;
+    @Column(name = "DonorName")
+    private String donorName;
 
-    @Column(name ="Quantity")
-    private String quantity;
+    @Column(name = "Message")
+    private String message;
 
-    @Column(name = "Reason")
-    private String reason;
+    @Column(name = "Amount")
+    private BigDecimal amount;
 
-    @Column(name = "Donator")
-    private String donator;
+    @Column(name = "Date")
+    private LocalDate date;
 }
