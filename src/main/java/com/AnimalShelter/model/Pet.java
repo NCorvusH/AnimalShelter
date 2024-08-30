@@ -40,4 +40,8 @@ public class Pet {
 
     @Column(name = "Adopted")
     private boolean adopted;
+
+    @Lob
+    @Column(name = "Photo")
+    private byte[] photo;
 }

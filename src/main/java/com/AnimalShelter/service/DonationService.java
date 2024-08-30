@@ -20,7 +20,7 @@ public class DonationService {
         return iDonationRepository.save(donation);
     }
 
-    public List<Donation> listDonations() {
+    public List<Donation> getAllDonation() {
         try {
             return iDonationRepository.findAll();
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class DonationService {
         }
     }
 
-    public Optional<Donation> viewDonationDetails(int donationId) {
+    public Optional<Donation> getDonationById (int donationId) {
         try {
             return iDonationRepository.findById(donationId);
         } catch (Exception e) {
@@ -36,9 +36,9 @@ public class DonationService {
         }
     }
 
-    public void editDonation(int donationId, Donation updateDonation) {
-        updateDonation.setId(donationId);
-        iDonationRepository.save(updateDonation);
+    public void updateDonation(Donation donation, int donationId) {
+        donation.setDonationId(donationId);
+        iDonationRepository.save(donation);
     }
 
     public boolean deleteDonation(int donationId) {
