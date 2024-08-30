@@ -8,37 +8,37 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/v1/donations")
 @CrossOrigin
 
 public class DonationController {
     @Autowired
     DonationService donationService;
 
-    @PostMapping(path = "/Donation")
+    @PostMapping(path = "")
          public Donation createDonation(@RequestBody Donation donation) {
         return donationService.createDonation(donation);
 
     }
 
-    @GetMapping(path = "/Donation")
+    @GetMapping(path = "")
        public List<Donation> getAllDonation(){
         return donationService.getAllDonation();
     }
 
-    @GetMapping(path = "/Donation/{id}")
+    @GetMapping(path = "/{id}")
         public Optional<Donation> getDonationId(@PathVariable int id){
         return donationService.getDonationById(id);
 
     }
 
-    @PutMapping(path = "/Donation/{id}")
+    @PutMapping(path = "/{id}")
          public void  updateDonation(@RequestBody Donation donation, @PathVariable int id){
          donationService.updateDonation(donation, id);
 
     }
 
-    @DeleteMapping(path = "/Donation/{id}")
+    @DeleteMapping(path = "/{id}")
     public String deleteDonationById(@PathVariable int id) {
         boolean ok = donationService.deleteDonation(id);
 

@@ -64,7 +64,7 @@ public class DonationControllerTest {
 
         String donationJson = objectMapper.writeValueAsString(donation1);
 
-        mockMvc.perform(post("/Donation")
+        mockMvc.perform(post("/api/v1/donations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(donationJson))
                 .andExpect(status().isOk())
@@ -80,7 +80,7 @@ public class DonationControllerTest {
     void readDonationById() throws Exception{
         when(donationService.getDonationById(2)).thenReturn(Optional.of(donation2));
 
-        mockMvc.perform(get("/Donation/2")
+        mockMvc.perform(get("/api/v1/donations/2")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.donationId").value(2))
@@ -95,13 +95,13 @@ public class DonationControllerTest {
     void deleteDonationById() throws Exception{
         when(donationService.deleteDonation(1)).thenReturn(true);
 
-        mockMvc.perform(delete("/Donation/1"))
+        mockMvc.perform(delete("/api/v1/donations/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Donation with id 1 was deleted" ));
 
         when(donationService.deleteDonation(1)).thenReturn(false);
 
-        mockMvc.perform(delete("/Donation/1"))
+        mockMvc.perform(delete("/api/v1/donations/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Donation with id 1 not found" ));
     }
@@ -114,7 +114,7 @@ public class DonationControllerTest {
 
         String donationJson = objectMapper.writeValueAsString(donation2);
 
-        mockMvc.perform(put("/Donation/2")
+        mockMvc.perform(put("/api/v1/donations/2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(donationJson))
                 .andExpect(status().isOk());
