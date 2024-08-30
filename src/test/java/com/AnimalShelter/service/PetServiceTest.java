@@ -43,6 +43,7 @@ public class PetServiceTest {
         pet1.setId(1);
         pet1.setName("Bolita");
         pet1.setAge(4);
+        pet1.setGender("Male");
         pet1.setBreed("Belier");
         pet1.setCategory("hola");
         pet1.setDescription("hola");
@@ -53,7 +54,7 @@ public class PetServiceTest {
         pet2.setName("Lia");
         pet2.setAge(5);
         pet2.setBreed("Water Dog");
-        //pet2.setSex("Female");
+        pet2.setGender("Female");
         pet2.setCategory("hola");
         pet2.setDescription("hola");
         pet2.setAdopted(true);
@@ -142,9 +143,7 @@ public class PetServiceTest {
         when(photo.getBytes()).thenReturn(photoContent.getBytes());
         petDTO.setPhoto(photo);
 
-
         Pet pet = petService.convertDTOToEntity(petDTO);
-
 
         assertNotNull(pet);
         assertEquals("Buddy", pet.getName());
@@ -170,9 +169,7 @@ public class PetServiceTest {
         petDTO.setAdopted(true);
         petDTO.setPhoto(null);
 
-
         Pet pet = petService.convertDTOToEntity(petDTO);
-
 
         assertNotNull(pet);
         assertEquals("Buddy", pet.getName());
