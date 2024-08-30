@@ -44,10 +44,9 @@ public class PetServiceTest {
         pet1.setName("Bolita");
         pet1.setAge(4);
         pet1.setBreed("Belier");
-        //pet1.setSex("Male");
         pet1.setCategory("hola");
         pet1.setDescription("hola");
-        //pet1.setAdopted();
+        pet1.setAdopted(true);
 
         pet2 = new Pet();
         pet2.setId(2);
@@ -57,7 +56,7 @@ public class PetServiceTest {
         //pet2.setSex("Female");
         pet2.setCategory("hola");
         pet2.setDescription("hola");
-        //pet2.setAdopted();
+        pet2.setAdopted(true);
     }
     @Test
     void updatePetTest(){
@@ -127,7 +126,7 @@ public class PetServiceTest {
     }
     @Test
     void convertDTOToEntity_withPhoto() throws IOException {
-        // Arrange
+
         PetDto petDTO = new PetDto();
         petDTO.setName("Buddy");
         petDTO.setAge(3);
@@ -145,7 +144,6 @@ public class PetServiceTest {
 
         Pet pet = petService.convertDTOToEntity(petDTO);
 
-        // Assert
         assertNotNull(pet);
         assertEquals("Buddy", pet.getName());
         assertEquals(3, pet.getAge());
