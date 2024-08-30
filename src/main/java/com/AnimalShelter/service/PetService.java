@@ -50,13 +50,12 @@ public class PetService {
 
     }
 
-    private Pet convertDTOToEntity (PetDto petDTO) throws IOException {
+    public Pet convertDTOToEntity (PetDto petDTO) throws IOException {
         Pet pet = new Pet();
         pet.setName(petDTO.getName());
         pet.setAge(petDTO.getAge());
         pet.setBreed(petDTO.getBreed());
         pet.setGender(petDTO.getGender());
-        pet.setSex(petDTO.getSex());
         pet.setCategory(petDTO.getCategory());
         pet.setDescription(petDTO.getDescription());
         pet.setAdopted(petDTO.isAdopted());
