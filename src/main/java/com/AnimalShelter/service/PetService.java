@@ -56,7 +56,6 @@ public class PetService {
         pet.setAge(petDTO.getAge());
         pet.setBreed(petDTO.getBreed());
         pet.setGender(petDTO.getGender());
-        pet.setSex(petDTO.getSex());
         pet.setCategory(petDTO.getCategory());
         pet.setDescription(petDTO.getDescription());
         pet.setAdopted(petDTO.isAdopted());
