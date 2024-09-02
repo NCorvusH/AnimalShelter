@@ -43,6 +43,6 @@ public class Pet {
     private byte[] photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false)
     private User user;
 }

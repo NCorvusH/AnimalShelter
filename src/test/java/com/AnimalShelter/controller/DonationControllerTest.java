@@ -41,14 +41,14 @@ public class DonationControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(donationController).build();
 
         donation1 = new Donation();
-        donation1.setDonationId(1);
+        donation1.setId(1);
         donation1.setDonorName("Emilia");
         donation1.setMessage("donation for beds");
         donation1.setAmount(new BigDecimal(100));
         donation1.setDate(LocalDate.of(2024,3,8));
 
         donation2 = new Donation();
-        donation2.setDonationId(2);
+        donation2.setId(2);
         donation2.setDonorName("anonymous");
         donation2.setMessage("Donation to improve the shelter");
         donation2.setAmount(new BigDecimal(10000));
@@ -68,7 +68,7 @@ public class DonationControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(donationJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.donationId").value(1))
+                .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.donorName").value("Emilia"))
                 .andExpect(jsonPath("$.message").value("donation for beds"))
                 .andExpect(jsonPath("$.amount").value(100))
@@ -83,7 +83,7 @@ public class DonationControllerTest {
         mockMvc.perform(get("/api/v1/donations/2")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.donationId").value(2))
+                .andExpect(jsonPath("$.id").value(2))
                 .andExpect(jsonPath("$.donorName").value("anonymous"))
                 .andExpect(jsonPath("$.message").value("Donation to improve the shelter"))
                 .andExpect(jsonPath("$.amount").value(10000))
