@@ -1,27 +1,29 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  task_list_app:
-    build: ../com.animalshelter
+  mysql_service:
+    image: mysql:8.0
+    container_name: mysql_animalshelter
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: db_animalshelter
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  springboot_app:
+    build: .
+    container_name: animalshelter
     ports:
       - "8080:8080"
     environment:
-      DB_URL: jdbc:mysql://mysql_service:3306/db_animalshelter
-      DB_USER_NAME: root
-      DB_PASSWORD:
-    restart: always
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_service:3306/db_animalshelter
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
-      mysql_service:
-        condition: service_healthy
-  mysql_service:
-    image: mysql:8.0.33
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: db_animalshelter
-    restart: always
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      - mysql_service
+
+volumes:
+  mysql_data:
