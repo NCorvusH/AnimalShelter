@@ -43,9 +43,8 @@ class JwtServiceTest {
         assertNotNull(token, "The token should not be null");
         assertFalse(token.isEmpty(), "The token should not be empty");
 
-        // Optionally verify basic JWT format
         String[] parts = token.split("\\.");
-        assertTrue(parts.length == 3, "The JWT token should have 3 parts");
+        assertEquals(3, parts.length, "The JWT token should have 3 parts");
     }
 
     @Test

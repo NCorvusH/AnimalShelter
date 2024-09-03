@@ -1,4 +1,4 @@
-package jwt;
+package com.AnimalShelter.jwt;
 
 import com.AnimalShelter.jwt.AuthTokenFilter;
 import com.AnimalShelter.service.JwtService;
