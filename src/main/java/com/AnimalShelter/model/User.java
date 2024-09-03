@@ -30,8 +30,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     ERole role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Donation donation;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Pet> pets = new HashSet<>();

@@ -17,8 +17,7 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DonationId")
-    private int donationId;
+    private int id;
 
     @Column(name = "DonorName")
     private String donorName;
@@ -32,7 +31,5 @@ public class Donation {
     @Column(name = "Date")
     private LocalDate date;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
+
 }

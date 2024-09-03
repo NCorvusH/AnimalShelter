@@ -36,14 +36,14 @@ public class DonationService {
         }
     }
 
-    public void updateDonation(Donation donation, int donationId) {
-        donation.setDonationId(donationId);
+    public void updateDonation(Donation donation, int Id) {
+        donation.setId(Id);
         iDonationRepository.save(donation);
     }
 
-    public boolean deleteDonation(int donationId) {
+    public boolean deleteDonation(int Id) {
         try {
-            iDonationRepository.deleteById(donationId);
+            iDonationRepository.deleteById(Id);
             return true;
         } catch (Exception e) {
             return false;
