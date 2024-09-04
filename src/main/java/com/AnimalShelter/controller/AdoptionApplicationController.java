@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/adoption-applications")
+@RequestMapping("/api/adoption/applications")
 public class AdoptionApplicationController {
 
     private final AdoptionApplicationService adoptionApplicationService;

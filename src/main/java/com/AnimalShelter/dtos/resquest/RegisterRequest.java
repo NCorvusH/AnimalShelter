@@ -15,4 +15,6 @@ public class RegisterRequest {
     String email;
     String password;
     ERole role;
+
+
 }
