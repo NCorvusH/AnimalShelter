@@ -1,4 +1,4 @@
-package com.AnimalShelter.Model;
+package com.AnimalShelter.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,9 +29,6 @@ public class Pet {
     @Column(name= "Gender")
     private String gender;
 
-    @Column(name = "Sex")
-    private Boolean sex;
-
     @Column(name = "Category")
     private String category;
 
@@ -40,4 +37,12 @@ public class Pet {
 
     @Column(name = "Adopted")
     private boolean adopted;
+
+    @Lob
+    @Column(name = "Photo")
+    private byte[] photo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false)
+    private User user;
 }
