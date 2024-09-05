@@ -74,7 +74,7 @@ public class PetControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String petJson = objectMapper.writeValueAsString(pet1);
 
-        mockMvc.perform(post("/pet")
+        mockMvc.perform(post("/api/v1/pet")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(petJson))
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ public class PetControllerTest {
 
         String petJson = objectMapper.writeValueAsString(pet2);
 
-        mockMvc.perform(put("/pet/2")
+        mockMvc.perform(put("/api/v1/pet/2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(petJson))
                 .andExpect(status().isOk());
@@ -107,7 +107,7 @@ public class PetControllerTest {
     void getPetById() throws Exception {
         when(petService.getPetById(2)).thenReturn(Optional.of(pet2));
 
-        mockMvc.perform(get("/pet/2")
+        mockMvc.perform(get("/api/v1/pet/2")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(2))
@@ -128,7 +128,7 @@ public class PetControllerTest {
 
         when(petService.deletePetById(petId)).thenReturn(true);
 
-        mockMvc.perform(delete("/pet/2", petId))
+        mockMvc.perform(delete("/api/v1/pet/2", petId))
                 .andExpect(status().isNoContent());
 
     }
@@ -138,7 +138,7 @@ public class PetControllerTest {
         int petId = 2;
         when(petService.deletePetById(petId)).thenReturn(false);
 
-        mockMvc.perform(delete("/pet/2", petId))
+        mockMvc.perform(delete("/api/v1/pet/2", petId))
                 .andExpect(status().isNotFound());
     }
 
@@ -147,7 +147,7 @@ public class PetControllerTest {
         int petId = 2;
         doThrow(new RuntimeException("Unexpected Error")).when(petService).deletePetById(petId);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/pet/2", petId))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/pet/2", petId))
                 .andExpect(status().isInternalServerError());
     }
 }
