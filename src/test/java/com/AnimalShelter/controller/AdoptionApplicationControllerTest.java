@@ -9,7 +9,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +24,9 @@ class AdoptionApplicationControllerTest {
 
     @Mock
     private AdoptionApplicationService adoptionApplicationService;
+    private MockMvc mockMvc;
+    private AdoptionApplication adoptionApplication1;
+    private AdoptionApplication adoptionApplication2;
 
     @InjectMocks
     private AdoptionApplicationController adoptionApplicationController;
@@ -28,6 +34,43 @@ class AdoptionApplicationControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(adoptionApplicationController).build();
+
+        adoptionApplication1 = new AdoptionApplication();
+        adoptionApplication1.setApplicationId(1);
+        adoptionApplication1.setUserId(1);
+        adoptionApplication1.setPetId(1);
+        adoptionApplication1.setDateSubmitted(LocalDate.of(2024, 05, 05));
+        adoptionApplication1.setApplicantName("Diego");
+        adoptionApplication1.setApplicantEmail("Diego@diego.diego");
+        adoptionApplication1.setApplicantPhone("+34 123456789");
+        adoptionApplication1.setCountry("España");
+        adoptionApplication1.setCity("Cuenca");
+        adoptionApplication1.setAddressLine1("Arriba");
+        adoptionApplication1.setAddressLine2("Izquierda");
+        adoptionApplication1.setAddressLine3("7ºB");
+        adoptionApplication1.setZipCode(12345);
+        adoptionApplication1.setReasonForAdoption("Want pet please");
+        adoptionApplication1.setPreviousPets("None");
+        adoptionApplication1.setComments("Lonely petless sad");
+
+        adoptionApplication2 = new AdoptionApplication();
+        adoptionApplication2.setApplicationId(1);
+        adoptionApplication2.setUserId(1);
+        adoptionApplication2.setPetId(1);
+        adoptionApplication2.setDateSubmitted(LocalDate.of(2024, 05, 05));
+        adoptionApplication2.setApplicantName("Cocoliso");
+        adoptionApplication2.setApplicantEmail("yes@good.ok");
+        adoptionApplication2.setApplicantPhone("+34 987654321");
+        adoptionApplication2.setCountry("Marte");
+        adoptionApplication2.setCity("Sevilla");
+        adoptionApplication2.setAddressLine1("Bepp");
+        adoptionApplication2.setAddressLine2("Boop");
+        adoptionApplication2.setAddressLine3("");
+        adoptionApplication2.setZipCode(67890);
+        adoptionApplication2.setReasonForAdoption("It's my hobby");
+        adoptionApplication2.setPreviousPets("70000 nameless cats");
+        adoptionApplication2.setComments("One more to the collection");
     }
 
     @Test

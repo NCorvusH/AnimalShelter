@@ -2,14 +2,16 @@ package com.AnimalShelter.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "AdoptionApplication")
+@NoArgsConstructor
 public class AdoptionApplication {
 
     @Id
@@ -24,9 +26,9 @@ public class AdoptionApplication {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dateSubmitted;
+    private LocalDate dateSubmitted;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "ApplicantName")
     private String applicantName;
 
     @Column(nullable = false, length = 100)
@@ -51,7 +53,7 @@ public class AdoptionApplication {
     private String addressLine3;
 
     @Column(nullable = false, length = 10)
-    private String zipCode;
+    private int zipCode;
 
     @Column(length = 500)
     private String reasonForAdoption;
